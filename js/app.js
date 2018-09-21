@@ -2,6 +2,15 @@
  * Create a list that holds all of your cards
  */
 
+let cardList = ['diamond', 'diamond', 'paper-plane-o', 'paper-plane-o', 'anchor', 
+					'anchor', 'bolt', 'bolt', 'cube', 'cube', 'leaf', 'leaf', 
+					'bicycle', 'bicycle', 'bomb', 'bomb'
+				 ];
+
+function createCard(card) {
+	return `<li class="card"><i class="fa fa-${card}"></i></li>`
+}
+
 
 /*
  * Display the cards on the page
@@ -25,6 +34,18 @@ function shuffle(array) {
     return array;
 }
 
+shuffle(cardList);
+
+function startGame() {
+	let deck = document.querySelector('.deck');
+	const cardHTML = cardList.map(function(card){
+		return createCard(card);
+	});
+
+	deck.innerHTML = cardHTML.join('');
+}
+
+startGame();
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -36,3 +57,18 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+const cards = document.querySelectorAll('.card');
+
+for (let i = 0; i < cards.length; i++) {
+
+	const selectedCard = cards[i];
+
+	
+		selectedCard.addEventListener('click', function(){
+			if (!this.classList.contains('open') && !this.classList.contains('show') && !this.classList.contains('match')) {
+				this.classList.add('open', 'show');
+				console.log('opened');
+			}
+		});
+}
