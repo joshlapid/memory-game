@@ -8,7 +8,7 @@ let cardList = ['diamond', 'diamond', 'paper-plane-o', 'paper-plane-o', 'anchor'
 				 ];
 
 function createCard(card) {
-	return `<li class="card"><i class="fa fa-${card}"></i></li>`
+	return `<li class="card" data-card="${card}"><i class="fa fa-${card}"></i></li>`
 }
 
 
@@ -34,15 +34,54 @@ function shuffle(array) {
     return array;
 }
 
-shuffle(cardList);
-
 function startGame() {
+	shuffle(cardList);
 	let deck = document.querySelector('.deck');
 	const cardHTML = cardList.map(function(card){
 		return createCard(card);
 	});
 
 	deck.innerHTML = cardHTML.join('');
+
+
+	const cards = document.querySelectorAll('.card');
+
+	let cardsSelectedCounter = 0;
+	let cardsSelected = [];
+	let movesCounter = 0;
+
+	for (let i = 0; i < cards.length; i++) {
+
+		const selectedCard = cards[i];
+	
+		selectedCard.addEventListener('click', function(){
+			if (!this.classList.contains('open') && !this.classList.contains('show') && !this.classList.contains('match') && cardsSelectedCounter != 2) {
+				this.classList.add('open', 'show');
+				cardsSelected.push(selectedCard);
+				console.log(cardsSelected);
+				cardsSelectedCounter++;
+
+				if (cardsSelectedCounter == 2) {
+					if( cardsSelected[0].dataset.card == cardsSelected[1].dataset.card) {
+						cardsSelected[0].classList.add('match');
+						cardsSelected[1].classList.add('match');
+						cardsSelectedCounter = 0;
+						cardsSelected = [];
+					} else {
+						setTimeout(function(){
+							cardsSelected[0].classList.remove('open', 'show');
+							cardsSelected[1].classList.remove('open', 'show');
+							cardsSelectedCounter = 0;
+							cardsSelected = [];
+						}, 1000)
+
+					}
+					movesCounter++;
+					document.querySelector('.moves').innerText = movesCounter;
+				}
+			}
+		});
+	}
 }
 
 startGame();
@@ -58,17 +97,4 @@ startGame();
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-const cards = document.querySelectorAll('.card');
 
-for (let i = 0; i < cards.length; i++) {
-
-	const selectedCard = cards[i];
-
-	
-		selectedCard.addEventListener('click', function(){
-			if (!this.classList.contains('open') && !this.classList.contains('show') && !this.classList.contains('match')) {
-				this.classList.add('open', 'show');
-				console.log('opened');
-			}
-		});
-}
