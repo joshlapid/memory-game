@@ -35,6 +35,9 @@ function shuffle(array) {
 }
 
 function startGame() {
+
+
+
 	shuffle(cardList);
 	let deck = document.querySelector('.deck');
 	const cardHTML = cardList.map(function(card){
@@ -50,12 +53,26 @@ function startGame() {
 	let cardsSelected = [];
 	let movesCounter = 0;
 	let movesSuccess= 0;
+	let timer = 0;
+	let timerStart = 0;
+	let gameTimer = 0;
 
 	for (let i = 0; i < cards.length; i++) {
 
 		const selectedCard = cards[i];
 	
+		// CARD SELECTION
 		selectedCard.addEventListener('click', function(){
+
+			// TIMER
+			if (timerStart == 0) {
+				gameTimer = setInterval(function(){
+					timer++;
+					console.log(timer);
+				}, 1000)
+				timerStart++;
+			}
+
 			if (!this.classList.contains('open') && !this.classList.contains('show') && !this.classList.contains('match') && cardsSelectedCounter != 2) {
 				this.classList.add('open', 'show');
 				cardsSelected.push(selectedCard);
@@ -68,6 +85,14 @@ function startGame() {
 						cardsSelected[1].classList.add('match');
 						cardsSelectedCounter = 0;
 						cardsSelected = [];
+						movesSuccess++;
+
+						// WIN MODAL
+						if (movesSuccess == 8) {
+							document.querySelector('.win').classList.remove('hide');
+							document.querySelector('.timer').innerText = timer + ' ' + 'seconds';
+							clearInterval(gameTimer);
+						}
 					} else {
 						setTimeout(function(){
 							cardsSelected[0].classList.remove('open', 'show');
@@ -80,15 +105,16 @@ function startGame() {
 					movesCounter++;
 					document.querySelector('.moves').innerText = movesCounter;
 
-					if (movesCounter > 5) {
+					// STAR COUNTER LOGIC
+					if (movesCounter > 8) {
 						document.querySelector('.star-three').classList.add('hide');
 					}
 
-					if (movesCounter > 10) {
+					if (movesCounter > 15) {
 						document.querySelector('.star-two').classList.add('hide');
 					}
 
-					if (movesCounter > 15) {
+					if (movesCounter > 20) {
 						document.querySelector('.star-one').classList.add('hide');
 					}
 				}
@@ -103,6 +129,7 @@ const restartButton = document.querySelector('.restart');
 
 restartButton.addEventListener('click', function() {
 	document.querySelector('.moves').innerText = '0';
+	document.querySelector('.win').classList.add('hide');
 	startGame();
 });
 
