@@ -49,6 +49,7 @@ function startGame() {
 	let cardsSelectedCounter = 0;
 	let cardsSelected = [];
 	let movesCounter = 0;
+	let movesSuccess= 0;
 
 	for (let i = 0; i < cards.length; i++) {
 
@@ -78,6 +79,18 @@ function startGame() {
 					}
 					movesCounter++;
 					document.querySelector('.moves').innerText = movesCounter;
+
+					if (movesCounter > 5) {
+						document.querySelector('.star-three').classList.add('hide');
+					}
+
+					if (movesCounter > 10) {
+						document.querySelector('.star-two').classList.add('hide');
+					}
+
+					if (movesCounter > 15) {
+						document.querySelector('.star-one').classList.add('hide');
+					}
 				}
 			}
 		});
@@ -85,6 +98,13 @@ function startGame() {
 }
 
 startGame();
+
+const restartButton = document.querySelector('.restart');
+
+restartButton.addEventListener('click', function() {
+	document.querySelector('.moves').innerText = '0';
+	startGame();
+});
 
 /*
  * set up the event listener for a card. If a card is clicked:
