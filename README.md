@@ -1,11 +1,17 @@
 # Memory Game Project
 
+## Dependencies
+
+```
+<link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+<link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
+```
+
 ## Game rules
 
-If moves are greater than less 9 -> 3 start
-If moves are less than 16 -> 2 stars
-If moves are less than 21 -> 1 star
-If moves are 21 and greater -> 0 stars
+If moves are less 15 -> 3 stars
+If moves are less than 20 -> 2 stars
+If moves are more than 20 -> 1 star
 
 ## Contributing
 

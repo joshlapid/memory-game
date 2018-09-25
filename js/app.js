@@ -68,8 +68,10 @@ function startGame() {
 				gameTimer = setInterval(function(){
 					timer++;
 					console.log(timer);
+					document.querySelector('.timer-board').innerText = timer;
 				}, 1000)
 				timerStart++;
+
 			}
 
 			// CARDS CAN'T BE CLICKED IF OPENED OR MATCHED
@@ -110,17 +112,16 @@ function startGame() {
 					document.querySelector('.moves').innerText = movesCounter;
 
 					// STAR COUNTER LOGIC
-					if (movesCounter > 8) {
+					if (movesCounter > 15) {
+						document.querySelector('.star-three-modal').classList.add('hide');
 						document.querySelector('.star-three').classList.add('hide');
 					}
 
-					if (movesCounter > 15) {
+					if (movesCounter > 20) {
+						document.querySelector('.star-two-modal').classList.add('hide');
 						document.querySelector('.star-two').classList.add('hide');
 					}
 
-					if (movesCounter > 20) {
-						document.querySelector('.star-one').classList.add('hide');
-					}
 				}
 			}
 		});
@@ -130,10 +131,27 @@ function startGame() {
 startGame();
 
 const restartButton = document.querySelector('.restart');
+const restartButtonModal = document.querySelector('.restart-modal');
 
 restartButton.addEventListener('click', function() {
 	document.querySelector('.moves').innerText = '0';
 	document.querySelector('.win').classList.add('hide');
+	document.querySelector('.star-two').classList.remove('hide');
+	document.querySelector('.star-three').classList.remove('hide');
+	document.querySelector('.star-two-modal').classList.remove('hide');
+	document.querySelector('.star-three-modal').classList.remove('hide');
+	document.querySelector('.timer-board').innerText = '0';
+	startGame();
+});
+
+restartButtonModal.addEventListener('click', function() {
+	document.querySelector('.moves').innerText = '0';
+	document.querySelector('.win').classList.add('hide');
+	document.querySelector('.star-two').classList.remove('hide');
+	document.querySelector('.star-three').classList.remove('hide');
+	document.querySelector('.star-two-modal').classList.remove('hide');
+	document.querySelector('.star-three-modal').classList.remove('hide');
+	document.querySelector('.timer-board').innerText = '0';
 	startGame();
 });
 

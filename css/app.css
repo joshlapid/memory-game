@@ -122,3 +122,11 @@ h1 {
     padding: 30px;
     text-align: center;
 }
+
+.win p {
+    text-align: center;
+}
+
+.restart-modal {
+    cursor: pointer;
+}
