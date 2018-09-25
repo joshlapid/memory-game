@@ -10,7 +10,9 @@
 ## Game rules
 
 If moves are less 15 -> 3 stars
+
 If moves are less than 20 -> 2 stars
+
 If moves are more than 20 -> 1 star
 
 ## Contributing
