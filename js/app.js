@@ -34,9 +34,8 @@ function shuffle(array) {
     return array;
 }
 
+// INITIATES GAME
 function startGame() {
-
-
 
 	shuffle(cardList);
 	let deck = document.querySelector('.deck');
@@ -73,6 +72,7 @@ function startGame() {
 				timerStart++;
 			}
 
+			// CARDS CAN'T BE CLICKED IF OPENED OR MATCHED
 			if (!this.classList.contains('open') && !this.classList.contains('show') && !this.classList.contains('match') && cardsSelectedCounter != 2) {
 				this.classList.add('open', 'show');
 				cardsSelected.push(selectedCard);
@@ -80,6 +80,8 @@ function startGame() {
 				cardsSelectedCounter++;
 
 				if (cardsSelectedCounter == 2) {
+
+					// MOVE SUCCESSFUL
 					if( cardsSelected[0].dataset.card == cardsSelected[1].dataset.card) {
 						cardsSelected[0].classList.add('match');
 						cardsSelected[1].classList.add('match');
@@ -93,6 +95,8 @@ function startGame() {
 							document.querySelector('.timer').innerText = timer + ' ' + 'seconds';
 							clearInterval(gameTimer);
 						}
+
+					// MOVE FAILED
 					} else {
 						setTimeout(function(){
 							cardsSelected[0].classList.remove('open', 'show');

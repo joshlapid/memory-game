@@ -1,17 +1,11 @@
 # Memory Game Project
 
-## Table of Contents
+## Game rules
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
-
-## Instructions
-
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
-
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+If moves are greater than less 9 -> 3 start
+If moves are less than 16 -> 2 stars
+If moves are less than 21 -> 1 star
+If moves are 21 and greater -> 0 stars
 
 ## Contributing
 
