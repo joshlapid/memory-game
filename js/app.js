@@ -56,6 +56,7 @@ function startGame() {
 	let timerStart = 0;
 	let gameTimer = 0;
 
+
 	for (let i = 0; i < cards.length; i++) {
 
 		const selectedCard = cards[i];
@@ -126,34 +127,36 @@ function startGame() {
 			}
 		});
 	}
+	const restartButton = document.querySelector('.restart');
+	const restartButtonModal = document.querySelector('.restart-modal');
+
+	restartButton.addEventListener('click', function() {
+		document.querySelector('.moves').innerText = '0';
+		document.querySelector('.win').classList.add('hide');
+		document.querySelector('.star-two').classList.remove('hide');
+		document.querySelector('.star-three').classList.remove('hide');
+		document.querySelector('.star-two-modal').classList.remove('hide');
+		document.querySelector('.star-three-modal').classList.remove('hide');
+		document.querySelector('.timer-board').innerText = '0';
+		clearInterval(gameTimer);
+		startGame();
+	});
+	
+	restartButtonModal.addEventListener('click', function() {
+		document.querySelector('.moves').innerText = '0';
+		document.querySelector('.win').classList.add('hide');
+		document.querySelector('.star-two').classList.remove('hide');
+		document.querySelector('.star-three').classList.remove('hide');
+		document.querySelector('.star-two-modal').classList.remove('hide');
+		document.querySelector('.star-three-modal').classList.remove('hide');
+		document.querySelector('.timer-board').innerText = '0';
+		startGame();
+	});
 }
 
 startGame();
 
-const restartButton = document.querySelector('.restart');
-const restartButtonModal = document.querySelector('.restart-modal');
 
-restartButton.addEventListener('click', function() {
-	document.querySelector('.moves').innerText = '0';
-	document.querySelector('.win').classList.add('hide');
-	document.querySelector('.star-two').classList.remove('hide');
-	document.querySelector('.star-three').classList.remove('hide');
-	document.querySelector('.star-two-modal').classList.remove('hide');
-	document.querySelector('.star-three-modal').classList.remove('hide');
-	document.querySelector('.timer-board').innerText = '0';
-	startGame();
-});
-
-restartButtonModal.addEventListener('click', function() {
-	document.querySelector('.moves').innerText = '0';
-	document.querySelector('.win').classList.add('hide');
-	document.querySelector('.star-two').classList.remove('hide');
-	document.querySelector('.star-three').classList.remove('hide');
-	document.querySelector('.star-two-modal').classList.remove('hide');
-	document.querySelector('.star-three-modal').classList.remove('hide');
-	document.querySelector('.timer-board').innerText = '0';
-	startGame();
-});
 
 /*
  * set up the event listener for a card. If a card is clicked:
